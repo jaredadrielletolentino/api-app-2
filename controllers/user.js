@@ -26,8 +26,6 @@ module.exports.registerUser = (req, res) => {
     // If all needed requirements are achieved
     } else {
         let newUser = new User({
-            firstName : req.body.firstName,
-            lastName : req.body.lastName,
             email : req.body.email,
             mobileNo : req.body.mobileNo,
             password : bcrypt.hashSync(req.body.password, 10)
