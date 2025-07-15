@@ -1,15 +1,15 @@
 // Dependencies
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+const mongoose = require('mongoose')
+const cors = require('cors')
 
 // Requiring Routes
-const userRoutes = require('./routes/users.js');
-const movieRoutes = require('./routes/movies.js');
+const userRoutes = require('./routes/users');
+const movieRoutes = require('./routes/movies');
 
 //Server setup
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -25,8 +25,6 @@ app.use('/users', userRoutes);
 app.use('/movies', movieRoutes);
 
 // Server
-
-
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`API is now online on port ${PORT}`);

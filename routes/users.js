@@ -1,21 +1,16 @@
-//[SECTION] Dependencies and Modules
+// Dependencies and Modules
 const express = require('express');
-const userController = require('../controllers/user');
-
+const userController = require('../controllers/users');
 const { verify } = require("../auth");
 
-//[SECTION] Routing Component
+//Routing Component
 const router = express.Router();
 
-//[SECTION] Route for User Registration
-router.post("/register", userController.registerUser);
+// Public routes
+router.post('/register', userController.registerUser);
+router.post('/login', userController.loginUser);
 
-//[SECTION] Route for User Login
-router.post("/login", userController.loginUser);
-
-//[Section] Activity: Route for retrieving user details
-router.get("/details", verify, userController.getProfile);
+// Protected routes
+router.get('/profile', verify, userController.getProfile);
 
 module.exports = router;
-
-
