@@ -9,9 +9,14 @@ const auth = require('../auth');
 module.exports.registerUser = (req, res) => {
 	if(!req.body.email.includes('@')) {
 		return res.status(200).send({message : 'Invalid email format'})
-	}
+	} 
+	// Checks if the mobile number has the correct number of characters
+    else if (req.body.mobileNo.length !== 11){
+        // if the mobile number is not in the correct number of characters, send a message 'Mobile number is invalid'.
+        return res.status(400).send({ message: 'Mobile number is invalid' });
+    }
 
-	if(req.body.password.length < 8){
+	else if(req.body.password.length < 8){
 		return res.status(200).send({ message: 'Password must be at least 8 characters' });
 	}
 
@@ -25,6 +30,7 @@ module.exports.registerUser = (req, res) => {
 
 		const newUser = new User({
 			email : req.body.email,
+			mobileNo : req.body.mobileNo,
 			password : bcrypt.hashSync(req.body.password, 10)
 		});
 
